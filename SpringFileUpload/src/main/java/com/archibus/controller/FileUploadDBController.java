@@ -32,6 +32,7 @@ public class FileUploadDBController {
 	public String handleFileUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload)
 			throws Exception {
 
+		ModelAndView modelAndView = new ModelAndView("AddedSuccessfully");
 		/**
 		 * Establishing connection to database.
 		 */
@@ -52,7 +53,7 @@ public class FileUploadDBController {
 			}
 		}
 
-		return "AddedSuccessfully";
+		return modelAndView;
 	}
 
 	/**
