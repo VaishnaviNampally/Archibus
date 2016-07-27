@@ -25,6 +25,9 @@ public class FileUploadDBController {
 	 * Upload single file using Spring Controller. Gets the file from view
 	 * (upload.jsp)
 	 */
+	 @Autowired
+	 FileUploadDAO userDAO;
+	 
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST)
 	public String handleFileUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload)
 			throws Exception {
@@ -32,7 +35,6 @@ public class FileUploadDBController {
 		/**
 		 * Establishing connection to database.
 		 */
-		FileUploadDAO userDAO = new FileUploadDAO();
 		if (fileUpload != null && fileUpload.length > 0) {
 			for (CommonsMultipartFile aFile : fileUpload) {
 
@@ -62,7 +64,6 @@ public class FileUploadDBController {
 			@RequestParam("fileName") int fileID) {
 
 		ModelAndView mv;
-		FileUploadDAO userDAO = new FileUploadDAO();
 		int size = userDAO.getAllFiles().size();
 		/**
 		 * Returns an error page when fileID entered is not valid in the
