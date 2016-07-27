@@ -33,9 +33,10 @@ public class FileUploadFSController {
 	 * file from view (upload.jsp)
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public String uploadFileHandler(@RequestParam("name") String name, @RequestParam("file") MultipartFile file,
+	public ModelAndView uploadFileHandler(@RequestParam("name") String name, @RequestParam("file") MultipartFile file,
 			Model model) {
 
+		ModelAndView modelAndView = new ModelAndView("list");
 		/**
 		 * If file uploaded is not empty, data from file is stored in a byte
 		 * array
@@ -74,19 +75,21 @@ public class FileUploadFSController {
 
 				fileList.add(sFile);
 				model.addAttribute(fileList);
-				return "list";
+				return modelAndView;
 
 			} catch (Exception e) {
 				/**
 				 * Redirecting to an error page if file not uploaded
 				 */
-				return "error1";
+				 ModelAndView modelAndView = new ModelAndView("error1");
+				return modelAndView;
 			}
 		} else {
 			/**
 			 * Redirecting to an error page if file to be uploaded is left blank
 			 */
-			return "error2";
+			 ModelAndView modelAndView = new ModelAndView("error2");
+			return modelAndView;
 		}
 	}
 }
